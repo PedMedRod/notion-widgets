@@ -1,78 +1,111 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>TradingView - Top Stories (Stocks)</title>
+
   <style>
-    /* Wrapper limpio para Notion */
-    html, body {
-      margin: 0;
-      padding: 0;
-      width: 100%;
-      height: 100%;
-      background: transparent; /* deja que Notion ponga su fondo */
-      overflow: hidden;
+    :root{
+      --bg: #ffffff;
+      --border: rgba(0,0,0,.10);
+      --shadow: 0 10px 30px rgba(0,0,0,.08);
+      --radius: 18px;
+    }
+
+    html, body{
+      margin:0;
+      padding:0;
+      width:100%;
+      height:100%;
+      background: #f3f4f6; /* gris muy suave alrededor */
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      overflow:hidden;
     }
 
-    .wrap {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: stretch;
-      justify-content: stretch;
+    /* Centra el widget y evita que “se estire” infinito en pantallas grandes */
+    .page{
+      width:100%;
+      height:100%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding: 16px;
+      box-sizing:border-box;
     }
 
-    /* TradingView inyecta su propio layout; esto evita scroll raro del contenedor */
-    .tradingview-widget-container {
-      width: 100%;
-      height: 100%;
-    }
-    .tradingview-widget-container__widget {
-      width: 100%;
-      height: 100%;
+    .card{
+      width: min(1100px, 100%);     /* máximo ancho */
+      height: min(740px, 100%);     /* máximo alto */
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;             /* recorta esquinas redondeadas */
+      position:relative;
     }
 
-    /* Oculta el bloque de copyright (opcional).
-       Nota: TradingView suele requerir atribución. Si quieres cumplir estrictamente, elimina esto. */
-    .tradingview-widget-copyright {
-      display: none;
+    /* Contenedor del widget */
+    .tradingview-widget-container,
+    .tradingview-widget-container__widget{
+      width:100%;
+      height:100%;
     }
+
+    /* Mantén la atribución visible (recomendado) */
+    .tradingview-widget-copyright{
+      position:absolute;
+      left: 14px;
+      bottom: 10px;
+      font-size: 12px;
+      opacity: .7;
+      z-index: 2;
+      background: rgba(255,255,255,.75);
+      padding: 6px 10px;
+      border-radius: 10px;
+      backdrop-filter: blur(6px);
+    }
+    .tradingview-widget-copyright a{
+      color:#111827;
+      text-decoration:none;
+    }
+    .trademark{ color:#111827; }
   </style>
 </head>
 
 <body>
-  <div class="wrap">
-    <!-- TradingView Widget BEGIN -->
-    <div class="tradingview-widget-container">
-      <div class="tradingview-widget-container__widget"></div>
+  <div class="page">
+    <div class="card">
+      <!-- TradingView Widget BEGIN -->
+      <div class="tradingview-widget-container">
+        <div class="tradingview-widget-container__widget"></div>
 
-      <div class="tradingview-widget-copyright">
-        <a href="https://www.tradingview.com/news/top-stories/" rel="noopener nofollow" target="_blank">
-          <span class="blue-text">Top stories</span>
-        </a>
-        <span class="trademark"> by TradingView</span>
+        <div class="tradingview-widget-copyright">
+          <a href="https://www.tradingview.com/news/top-stories/" rel="noopener nofollow" target="_blank">
+            Top stories
+          </a>
+          <span class="trademark"> by TradingView</span>
+        </div>
+
+        <script
+          type="text/javascript"
+          src="https://s3.tradingview.com/external-embedding/embed-widget-timeline.js"
+          async
+        >
+        {
+          "feedMode": "market",
+          "market": "stock",
+          "displayMode": "compact",
+          "width": "100%",
+          "height": "100%",
+          "colorTheme": "light",
+          "isTransparent": false,
+          "locale": "en"
+        }
+        </script>
       </div>
-
-      <script
-        type="text/javascript"
-        src="https://s3.tradingview.com/external-embedding/embed-widget-timeline.js"
-        async
-      >
-      {
-        "feedMode": "market",
-        "market": "stock",
-        "displayMode": "regular",
-        "width": "100%",
-        "height": "100%",
-        "colorTheme": "dark",
-        "isTransparent": true,
-        "locale": "en"
-      }
-      </script>
+      <!-- TradingView Widget END -->
     </div>
-    <!-- TradingView Widget END -->
   </div>
 </body>
 </html>
