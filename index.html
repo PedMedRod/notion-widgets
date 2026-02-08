@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>TradingView – Economic Calendar</title>
+    <title>Notion Widget Wrapper</title>
     <style>
       html, body {
         margin: 0;
@@ -11,55 +11,38 @@
         background: #0b0f14;
       }
 
-      /* Importante: evitamos doble scroll */
+      /* Evitar scroll externo */
       body { overflow: hidden; }
 
-      /* Centramos y limitamos ancho para "modo lista" */
+      /* Centramos el iframe interno */
       .page {
-        width: 100%;
         display: flex;
         justify-content: center;
         padding: 8px;
         box-sizing: border-box;
       }
 
-      /* Caja del widget: controla el layout y el alto visible */
-      .widget-box {
-        width: 420px;      /* <-- clave: modo lista */
+      /* AQUÍ controlas el layout real que “verá” TradingView */
+      .frame {
+        width: 420px;          /* fuerza modo lista */
         max-width: 100%;
-        height: 900px;     /* <-- súbelo si quieres menos scroll */
+        height: 900px;         /* alto visible en Notion */
+        border: 0;
         border-radius: 12px;
         overflow: hidden;
         background: #0b0f14;
       }
     </style>
   </head>
-
   <body>
     <div class="page">
-      <div class="widget-box">
-        <!-- TradingView Widget BEGIN -->
-        <div class="tradingview-widget-container" style="width:100%; height:100%;">
-          <div class="tradingview-widget-container__widget" style="width:100%; height:100%;"></div>
-
-          <script
-            type="text/javascript"
-            src="https://s3.tradingview.com/external-embedding/embed-widget-events.js"
-            async
-          >
-          {
-            "colorTheme": "dark",
-            "isTransparent": false,
-            "locale": "en",
-            "countryFilter": "us,eu",
-            "importanceFilter": "0,1",
-            "width": "100%",
-            "height": "100%"
-          }
-          </script>
-        </div>
-        <!-- TradingView Widget END -->
-      </div>
+      <iframe
+        class="frame"
+        src="./tv-events.html"
+        title="TradingView Economic Calendar"
+        scrolling="no"
+        loading="lazy"
+      ></iframe>
     </div>
   </body>
 </html>
