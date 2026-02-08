@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TradingView - Top Stories (Stocks)</title>
+  <style>
+    /* Wrapper limpio para Notion */
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      background: transparent; /* deja que Notion ponga su fondo */
+      overflow: hidden;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    }
+
+    .wrap {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: stretch;
+      justify-content: stretch;
+    }
+
+    /* TradingView inyecta su propio layout; esto evita scroll raro del contenedor */
+    .tradingview-widget-container {
+      width: 100%;
+      height: 100%;
+    }
+    .tradingview-widget-container__widget {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Oculta el bloque de copyright (opcional).
+       Nota: TradingView suele requerir atribución. Si quieres cumplir estrictamente, elimina esto. */
+    .tradingview-widget-copyright {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <!-- TradingView Widget BEGIN -->
+    <div class="tradingview-widget-container">
+      <div class="tradingview-widget-container__widget"></div>
+
+      <div class="tradingview-widget-copyright">
+        <a href="https://www.tradingview.com/news/top-stories/" rel="noopener nofollow" target="_blank">
+          <span class="blue-text">Top stories</span>
+        </a>
+        <span class="trademark"> by TradingView</span>
+      </div>
+
+      <script
+        type="text/javascript"
+        src="https://s3.tradingview.com/external-embedding/embed-widget-timeline.js"
+        async
+      >
+      {
+        "feedMode": "market",
+        "market": "stock",
+        "displayMode": "regular",
+        "width": "100%",
+        "height": "100%",
+        "colorTheme": "dark",
+        "isTransparent": true,
+        "locale": "en"
+      }
+      </script>
+    </div>
+    <!-- TradingView Widget END -->
+  </div>
+</body>
+</html>
