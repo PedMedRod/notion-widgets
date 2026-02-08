@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SPX500 Heatmap – Notion Wrapper</title>
+    <style>
+      html, body {
+        margin: 0;
+        padding: 0;
+        background: #ffffff;
+      }
+      body { overflow: hidden; }
+
+      .page {
+        display: flex;
+        justify-content: center;
+        padding: 12px;
+        box-sizing: border-box;
+        background: #ffffff;
+      }
+
+      /* Heatmap necesita bastante ancho para ser útil */
+      .frame {
+        width: 1200px;          /* ajusta: 1000–1400 según tu dashboard */
+        max-width: 100%;
+        height: 700px;          /* ajusta: 600–900 */
+        border: 1px solid rgba(0,0,0,0.08);
+        border-radius: 14px;
+        overflow: hidden;
+        background: #0b0f14;    /* fondo oscuro para integrar con el widget dark */
+        display: block;
+        box-shadow: 0 6px 24px rgba(0,0,0,0.08);
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="page">
+      <iframe
+        class="frame"
+        src="./tv-heatmap-sp500.html?v=1"
+        title="TradingView SPX500 Heatmap"
+        scrolling="no"
+        loading="lazy"
+      ></iframe>
+    </div>
+  </body>
+</html>
