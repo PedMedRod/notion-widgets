@@ -18,41 +18,31 @@
       padding:0;
       width:100%;
       height:100%;
-      background: #f3f4f6; /* gris muy suave alrededor */
+      background: transparent; /* ✅ sin gris exterior */
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       overflow:hidden;
     }
 
-    /* Centra el widget y evita que “se estire” infinito en pantallas grandes */
-    .page{
-      width:100%;
-      height:100%;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding: 16px;
-      box-sizing:border-box;
-    }
-
+    /* Sin “marco” exterior: la card ocupa todo el iframe de Notion */
     .card{
-      width: min(1100px, 100%);     /* máximo ancho */
-      height: min(740px, 100%);     /* máximo alto */
+      width: 100%;
+      height: 100%;
       background: var(--bg);
       border: 1px solid var(--border);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
-      overflow:hidden;             /* recorta esquinas redondeadas */
+      overflow:hidden;
       position:relative;
+      box-sizing:border-box;
     }
 
-    /* Contenedor del widget */
     .tradingview-widget-container,
     .tradingview-widget-container__widget{
       width:100%;
       height:100%;
     }
 
-    /* Mantén la atribución visible (recomendado) */
+    /* Atribución visible (recomendado) */
     .tradingview-widget-copyright{
       position:absolute;
       left: 14px;
@@ -74,38 +64,19 @@
 </head>
 
 <body>
-  <div class="page">
-    <div class="card">
-      <!-- TradingView Widget BEGIN -->
-      <div class="tradingview-widget-container">
-        <div class="tradingview-widget-container__widget"></div>
+  <div class="card">
+    <!-- TradingView Widget BEGIN -->
+    <div class="tradingview-widget-container">
+      <div class="tradingview-widget-container__widget"></div>
 
-        <div class="tradingview-widget-copyright">
-          <a href="https://www.tradingview.com/news/top-stories/" rel="noopener nofollow" target="_blank">
-            Top stories
-          </a>
-          <span class="trademark"> by TradingView</span>
-        </div>
-
-        <script
-          type="text/javascript"
-          src="https://s3.tradingview.com/external-embedding/embed-widget-timeline.js"
-          async
-        >
-        {
-          "feedMode": "market",
-          "market": "stock",
-          "displayMode": "compact",
-          "width": "100%",
-          "height": "100%",
-          "colorTheme": "light",
-          "isTransparent": false,
-          "locale": "en"
-        }
-        </script>
+      <div class="tradingview-widget-copyright">
+        <a href="https://www.tradingview.com/news/top-stories/" rel="noopener nofollow" target="_blank">
+          Top stories
+        </a>
+        <span class="trademark"> by TradingView</span>
       </div>
-      <!-- TradingView Widget END -->
-    </div>
-  </div>
-</body>
-</html>
+
+      <script
+        type="text/javascript"
+        src="https://s3.tradingview.com/external-embedding/embed-widget-timeline.js"
+        async
